@@ -1,0 +1,8 @@
+{
+  "name": "salon-management-system",
+  "private": true,
+  "scripts": {
+    "backend": "cd salon-backend && npm start",
+    "backend:install": "cd salon-backend && npm install"
+  }
+}
