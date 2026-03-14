@@ -1,0 +1,153 @@
+.add-form {
+  background: #fff;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1.5rem;
+}
+
+.add-form h2 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-field-btn label {
+  visibility: hidden;
+}
+
+.form-row .form-field input,
+.form-row .form-field select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.form-row .form-field input[type='text'] {
+  min-width: 160px;
+}
+
+.inline-input {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  min-width: 100px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.badge-active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-on_leave {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badge-inactive {
+  background: #f5f5f5;
+  color: #757575;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: #fff;
+  margin-right: 0.35rem;
+}
+
+.btn-sm.btn-accent {
+  background: var(--accent, #d4af37);
+  color: #1a1a1a;
+  border-color: var(--accent, #d4af37);
+}
+
+.btn-sm.btn-danger {
+  color: #c00;
+  border-color: #fcc;
+}
+
+.btn-sm.btn-danger:hover {
+  background: #fee;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.admin-page h1 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.page-desc {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.empty {
+  color: #666;
+  margin-top: 1rem;
+}
+
+.error {
+  color: #c00;
+  margin-bottom: 0.5rem;
+}

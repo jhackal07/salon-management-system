@@ -1,0 +1,56 @@
+<div class="admin-page">
+  <h1>Booking management</h1>
+  <p class="page-desc">View and manage all bookings. Change status or mark as paid.</p>
+
+  @if (loading) {
+    <p>Loading…</p>
+  } @else if (error) {
+    <p class="error">{{ error }}</p>
+  } @else {
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Booking #</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Service</th>
+            <th>Artist</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (b of bookings; track b.id) {
+            <tr>
+              <td><strong>{{ b.bookingNumber }}</strong></td>
+              <td>{{ b.date }}</td>
+              <td>{{ b.time }}</td>
+              <td>{{ b.serviceName }}</td>
+              <td>{{ b.artistName }}</td>
+              <td>{{ b.guestName || b.guestEmail || '—' }}</td>
+              <td>
+                <select [ngModel]="b.status" (ngModelChange)="setStatus(b, $event)" [disabled]="updatingId === b.id || b.status === 'paid' || b.status === 'cancelled'">
+                  @for (opt of statusOptions; track opt.value) {
+                    <option [value]="opt.value">{{ opt.label }}</option>
+                  }
+                </select>
+              </td>
+              <td>
+                @if (b.status !== 'paid' && b.status !== 'cancelled') {
+                  <button type="button" class="btn-sm btn-paid" (click)="markPaid(b)" [disabled]="updatingId === b.id">
+                    Mark as paid
+                  </button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    @if (bookings.length === 0) {
+      <p class="empty">No bookings yet.</p>
+    }
+  }
+</div>

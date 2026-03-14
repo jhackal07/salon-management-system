@@ -1,0 +1,20 @@
+<div class="page pricing-page">
+  <section class="section">
+    <h1 class="page-title">Packages Pricing</h1>
+    <p class="section-desc">Choose the plan that fits your needs.</p>
+    <div class="pricing-grid">
+      @for (plan of plans; track plan.name) {
+        <div class="pricing-card">
+          <h3>{{ plan.name }}</h3>
+          <ul>
+            @for (f of plan.features; track f) {
+              <li>{{ f }}</li>
+            }
+          </ul>
+          <p class="price"><span class="amount">₱{{ plan.price }}</span></p>
+          <a routerLink="/book" class="btn btn-accent">Get Plan</a>
+        </div>
+      }
+    </div>
+  </section>
+</div>

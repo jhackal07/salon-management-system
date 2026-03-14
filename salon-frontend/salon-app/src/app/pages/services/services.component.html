@@ -1,0 +1,15 @@
+<div class="page services-page">
+  <section class="section">
+    <h1 class="page-title">Our Services</h1>
+    <p class="section-desc">The best and fastest service we provide for you.</p>
+    <div class="services-grid">
+      @for (s of services; track s.title) {
+        <div class="service-card" [style.--card-color]="s.color">
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.desc }}</p>
+        </div>
+      }
+    </div>
+    <a routerLink="/book" class="btn btn-accent">Book Now</a>
+  </section>
+</div>

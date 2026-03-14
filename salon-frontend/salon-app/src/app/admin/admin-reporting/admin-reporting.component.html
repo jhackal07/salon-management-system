@@ -1,0 +1,97 @@
+<div class="admin-page">
+  <h1>Reporting</h1>
+  <p class="page-desc">Select a date range (default: today) and click Apply. All three reports use this range.</p>
+
+  <div class="report-controls">
+    <label>
+      <span>From</span>
+      <input type="date" [(ngModel)]="from" />
+    </label>
+    <label>
+      <span>To</span>
+      <input type="date" [(ngModel)]="to" />
+    </label>
+    <button type="button" class="btn btn-accent" (click)="applyRange()" [disabled]="loading">Apply</button>
+  </div>
+
+  @if (loading) {
+    <p class="loading-msg">Loading…</p>
+  }
+  @if (error) {
+    <p class="error">{{ error }}</p>
+    <p class="error-hint">Ensure the backend is running (port 5000) and try again.</p>
+  }
+
+  @if (report && !error) {
+    <!-- Section 1: Booking appointments report -->
+    <section class="report-section">
+      <h2 class="section-title">1. Booking appointments report</h2>
+      <p class="section-desc">Appointments from {{ report.from }} to {{ report.to }}.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Booking #</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Service</th>
+              <th>Artist</th>
+              <th>Customer</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (b of report.bookings; track b.id) {
+              <tr>
+                <td><strong>{{ b.bookingNumber }}</strong></td>
+                <td>{{ b.date }}</td>
+                <td>{{ b.time }}</td>
+                <td>{{ b.serviceName }}</td>
+                <td>{{ b.artistName }}</td>
+                <td>{{ b.guestName || b.guestEmail || '—' }}</td>
+                <td>{{ b.isGuest ? 'Guest' : 'Account' }}</td>
+                <td><span class="badge badge-{{ b.status }}">{{ b.status }}</span></td>
+                <td>₱{{ b.price | number:'1.2-2' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (report.bookings.length === 0) {
+        <p class="empty">No bookings in this date range.</p>
+      }
+    </section>
+
+    <!-- Section 2: Earnings report -->
+    <section class="report-section">
+      <h2 class="section-title">2. Earnings report</h2>
+      <p class="section-desc">Total earnings from <strong>paid</strong> bookings in this date range.</p>
+      <div class="earnings-block">
+        <span class="earnings-label">Total earnings</span>
+        <span class="earnings-value">₱{{ report.earnings | number:'1.2-2' }}</span>
+      </div>
+    </section>
+
+    <!-- Section 3: Non-account vs account users (consolidated) -->
+    <section class="report-section">
+      <h2 class="section-title">3. User type report</h2>
+      <p class="section-desc">Count of bookings by user type in this date range.</p>
+      <div class="user-stats">
+        <div class="user-stat-card guest">
+          <span class="user-stat-label">Non-account (guest) bookings</span>
+          <span class="user-stat-value">{{ report.guestCount }}</span>
+        </div>
+        <div class="user-stat-card account">
+          <span class="user-stat-label">Account user bookings</span>
+          <span class="user-stat-value">{{ report.accountCount }}</span>
+        </div>
+        <div class="user-stat-card total">
+          <span class="user-stat-label">Total bookings</span>
+          <span class="user-stat-value">{{ report.guestCount + report.accountCount }}</span>
+        </div>
+      </div>
+    </section>
+  }
+</div>

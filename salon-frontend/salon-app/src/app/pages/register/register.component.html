@@ -1,0 +1,40 @@
+<div class="page register-page">
+  <section class="section">
+    <h1 class="page-title">Create account</h1>
+    <p class="section-desc">Sign up to book with your account.</p>
+
+    @if (success) {
+      <div class="success-card">
+        <p>Account created. You can now sign in.</p>
+        <a routerLink="/login" class="btn btn-accent">Sign in</a>
+      </div>
+    } @else {
+      <form class="register-form" (ngSubmit)="submit()">
+        <div class="form-row">
+          <label for="reg-name">Name (optional)</label>
+          <input id="reg-name" type="text" [(ngModel)]="name" name="name" placeholder="Your name" />
+        </div>
+        <div class="form-row">
+          <label for="reg-email">Email</label>
+          <input id="reg-email" type="email" [(ngModel)]="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-row">
+          <label for="reg-password">Password</label>
+          <input id="reg-password" type="password" [(ngModel)]="password" name="password" placeholder="At least 6 characters" required minlength="6" />
+        </div>
+        <div class="form-row">
+          <label for="reg-confirm">Confirm password</label>
+          <input id="reg-confirm" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Repeat password" required />
+        </div>
+        @if (error) {
+          <p class="form-error">{{ error }}</p>
+        }
+        <button type="submit" class="btn btn-accent" [disabled]="loading">
+          {{ loading ? 'Creating account…' : 'Create account' }}
+        </button>
+      </form>
+    }
+
+    <p class="form-note">Already have an account? <a routerLink="/login">Sign in</a>.</p>
+  </section>
+</div>

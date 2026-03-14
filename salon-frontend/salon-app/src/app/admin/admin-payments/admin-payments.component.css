@@ -1,0 +1,19 @@
+.admin-page h1 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.page-desc {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.placeholder-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+  color: #666;
+}

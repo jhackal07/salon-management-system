@@ -1,0 +1,18 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Salon Admin</h2>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/bookings" routerLinkActive="active">Booking management</a>
+      <a routerLink="/admin/artists" routerLinkActive="active">Artist management</a>
+      <a routerLink="/admin/services" routerLinkActive="active">Service management</a>
+      <a routerLink="/admin/report" routerLinkActive="active">Reporting</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a routerLink="/home">← Back to site</a>
+      <button type="button" class="btn-logout" (click)="logout()">Log out</button>
+    </div>
+  </aside>
+  <main class="admin-main">
+    <router-outlet />
+  </main>
+</div>

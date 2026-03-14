@@ -18,5 +18,4 @@ cd salon-backend
 npm install
 node server.js
 
-Frontend:
-Generate Angular project and copy the src/app structure provided.
+Frontend: full Angular app in `salon-frontend/salon-app` (services and pages per folder). Run: `cd salon-frontend/salon-app && npm install && npm start`

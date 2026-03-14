@@ -1,0 +1,115 @@
+<div class="page booking-page">
+  <section class="section">
+    <h1 class="page-title">Book Appointment</h1>
+    <p class="section-desc">Choose your date, time, service, and artist. @if (!auth.isLoggedIn) { You can book as a guest or sign in. }</p>
+
+    @if (confirmed) {
+      <div class="confirmation-card">
+        <h2>Booking confirmed</h2>
+        <p class="booking-number">Your booking number</p>
+        <p class="number">{{ confirmed.bookingNumber }}</p>
+        <p class="hint">Save this number for your visit.</p>
+        <div class="details">
+          <p><strong>Date:</strong> {{ confirmed.date }}</p>
+          <p><strong>Time:</strong> {{ confirmed.time }}</p>
+          <p><strong>Service:</strong> {{ confirmed.serviceName }}</p>
+          <p><strong>Artist:</strong> {{ confirmed.artistName }}</p>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-accent" (click)="bookAnother()">Book another</button>
+          <a routerLink="/home" class="btn btn-outline">Back to home</a>
+        </div>
+      </div>
+    } @else {
+      <div class="booking-form-wrap">
+        @if (!auth.isLoggedIn) {
+          <div class="guest-toggle">
+            <label class="toggle-option">
+              <input type="radio" name="mode" [(ngModel)]="booking.asGuest" [value]="true" />
+              Book as guest
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="mode" [(ngModel)]="booking.asGuest" [value]="false" />
+              I have an account
+            </label>
+          </div>
+        }
+
+        <form class="booking-form" (ngSubmit)="submit()">
+          <div class="form-row">
+            <label>Date</label>
+            <input type="date" [(ngModel)]="booking.date" (ngModelChange)="onDateChange($event)" name="date" [min]="minDate" required />
+          </div>
+          <div class="form-row">
+            <label>Time</label>
+            <select [(ngModel)]="booking.time" name="time" required>
+              <option value="">Select time</option>
+              @for (slot of availableTimeSlots; track slot) {
+                <option [value]="slot">{{ slot }}</option>
+              }
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Service</label>
+            <select [(ngModel)]="booking.serviceId" name="serviceId" required>
+              <option [ngValue]="null">Select service</option>
+              @for (s of services; track s.id) {
+                <option [ngValue]="s.id">{{ s.name }} ({{ s.duration }} min)</option>
+              }
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Artist</label>
+            <select [(ngModel)]="booking.artistId" name="artistId" required [disabled]="!booking.date">
+              <option [ngValue]="null">{{ booking.date ? 'Select artist' : 'Select date first' }}</option>
+              @for (a of artists; track a.id) {
+                <option [ngValue]="a.id">{{ a.name }}</option>
+              }
+            </select>
+            @if (!booking.date) {
+              <span class="form-hint">Select a date to see artists available that day.</span>
+            }
+          </div>
+
+          @if (auth.isAdmin) {
+            <div class="form-row">
+              <label>Customer name</label>
+              <input type="text" [(ngModel)]="booking.guestName" name="guestName" placeholder="Customer's full name" required />
+            </div>
+            <div class="form-row">
+              <label>Customer email</label>
+              <input type="email" [(ngModel)]="booking.guestEmail" name="guestEmail" placeholder="customer@example.com" required />
+            </div>
+            <p class="form-hint">Booking on behalf of a customer. Enter their name and email.</p>
+          } @else if (!auth.isLoggedIn && booking.asGuest) {
+            <div class="form-row">
+              <label>Your name</label>
+              <input type="text" [(ngModel)]="booking.guestName" name="guestName" placeholder="Full name" />
+            </div>
+            <div class="form-row">
+              <label>Your email</label>
+              <input type="email" [(ngModel)]="booking.guestEmail" name="guestEmail" placeholder="email@example.com" />
+            </div>
+          } @else if (!auth.isLoggedIn) {
+            <div class="form-row">
+              <label>Email</label>
+              <input type="email" [(ngModel)]="booking.loginEmail" name="loginEmail" placeholder="Your account email" />
+            </div>
+            <div class="form-row">
+              <label>Password</label>
+              <input type="password" [(ngModel)]="booking.loginPassword" name="loginPassword" placeholder="Password" />
+            </div>
+            <p class="form-note">Don’t have an account? <button type="button" class="link-btn" (click)="booking.asGuest = true">Book as guest</button> instead.</p>
+          }
+
+          @if (error) {
+            <p class="form-error">{{ error }}</p>
+          }
+          <button type="submit" class="btn btn-accent" [disabled]="loading">
+            {{ loading ? 'Booking…' : 'Confirm booking' }}
+          </button>
+        </form>
+      </div>
+    }
+  </section>
+</div>

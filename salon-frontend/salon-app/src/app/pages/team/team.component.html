@@ -1,0 +1,26 @@
+<div class="page team-page">
+  <section class="section">
+    <h1 class="page-title">Our Team</h1>
+    <p class="section-desc">Meet the experts behind your perfect look.</p>
+    <div class="team-grid">
+      @for (m of (loading ? skeletonMembers : members); track m.id) {
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            @if (m.id >= 0) {
+              <img
+                [src]="getAvatar(m)"
+                [alt]="m.name"
+                class="team-avatar"
+                [class.team-avatar-loaded]="avatarLoaded[m.id]"
+                (load)="onAvatarLoad(m)"
+                fetchpriority="high"
+              />
+            }
+          </div>
+          <h3>{{ m.name }}</h3>
+          <p>{{ m.role }}</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,100 @@
+<div class="admin-page">
+  <h1>Artist management</h1>
+  <p class="page-desc">Add artists, set on-leave dates, or mark as inactive (hidden from Team and Booking).</p>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <div class="add-form">
+    <h2>Add artist</h2>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="new-artist-name">Name</label>
+        <input id="new-artist-name" type="text" [(ngModel)]="newArtist.name" name="name" placeholder="Artist name" />
+      </div>
+      <div class="form-field">
+        <label for="new-artist-gender">Gender</label>
+        <select id="new-artist-gender" [(ngModel)]="newArtist.gender" name="gender">
+          <option [ngValue]="null">—</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="new-artist-status">Status</label>
+        <select id="new-artist-status" [(ngModel)]="newArtist.status" name="status">
+          <option value="active">Active</option>
+          <option value="on_leave">On leave</option>
+        </select>
+      </div>
+      <div class="form-field form-field-btn">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-accent" (click)="add()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  @if (loading) {
+    <p>Loading…</p>
+  } @else {
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Status</th>
+            <th>On leave from</th>
+            <th>On leave to</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (a of artists; track a.id) {
+            <tr>
+              @if (editing && editing.id === a.id) {
+                <td><input type="text" [(ngModel)]="editing!.name" class="inline-input" /></td>
+                <td>
+                  <select [(ngModel)]="editing!.gender" class="inline-input">
+                    <option [ngValue]="null">—</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                  </select>
+                </td>
+                <td>
+                  <select [(ngModel)]="editing!.status" class="inline-input">
+                    <option value="active">Active</option>
+                    <option value="on_leave">On leave</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </td>
+                <td><input type="date" [(ngModel)]="editing!.on_leave_from" class="inline-input" /></td>
+                <td><input type="date" [(ngModel)]="editing!.on_leave_to" class="inline-input" /></td>
+                <td>
+                  <button type="button" class="btn-sm btn-accent" (click)="saveEdit()">Save</button>
+                  <button type="button" class="btn-sm btn-outline" (click)="cancelEdit()">Cancel</button>
+                </td>
+              } @else {
+                <td>{{ a.name }}</td>
+                <td>{{ a.gender === 'male' ? 'Male' : a.gender === 'female' ? 'Female' : '—' }}</td>
+                <td><span class="badge badge-{{ a.status }}">{{ a.status === 'on_leave' ? 'On leave' : a.status }}</span></td>
+                <td>{{ a.on_leave_from || '—' }}</td>
+                <td>{{ a.on_leave_to || '—' }}</td>
+                <td>
+                  <button type="button" class="btn-sm btn-outline" (click)="startEdit(a)">Edit</button>
+                  @if (a.status !== 'inactive') {
+                    <button type="button" class="btn-sm btn-danger" (click)="setInactive(a)">Set inactive</button>
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    @if (artists.length === 0) {
+      <p class="empty">No artists. Add one above.</p>
+    }
+  }
+</div>

@@ -1,0 +1,86 @@
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-tag">The best and fastest service</p>
+    <h1>Are You Planning to Pamper Yourself?</h1>
+    <p class="hero-desc">Relax, rejuvenate, and look your best. We offer premium treatments in a welcoming environment.</p>
+    <a routerLink="/book" class="btn btn-accent">READ MORE</a>
+    <div class="hero-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+  <div class="hero-image"></div>
+</section>
+
+<section class="section our-services">
+  <h2 class="section-title">Our Services</h2>
+  <p class="section-desc">The best and fastest service we provide for you.</p>
+  <div class="services-grid">
+    @for (s of services; track s.title) {
+      <div class="service-card" [style.--card-color]="s.color">
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.desc }}</p>
+      </div>
+    }
+  </div>
+  <a routerLink="/services" class="btn btn-accent">VIEW ALL</a>
+</section>
+
+<section class="section pricing">
+  <h2 class="section-title">Packages Pricing</h2>
+  <p class="section-desc">Choose the plan that fits your needs.</p>
+  <div class="pricing-grid">
+    @for (plan of plans; track plan.name) {
+      <div class="pricing-card">
+        <h3>{{ plan.name }}</h3>
+        <ul>
+          @for (f of plan.features; track f) {
+            <li>{{ f }}</li>
+          }
+        </ul>
+        <p class="price"><span class="amount">₱{{ plan.price }}</span></p>
+        <a routerLink="/book" class="btn btn-accent">Get Plan</a>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="section stats">
+  <h2 class="section-title">Our Statistics</h2>
+  <p class="section-desc">Numbers that speak for us.</p>
+  <div class="stats-grid">
+    @for (stat of stats; track stat.label) {
+      <div class="stat-card">
+        <span class="stat-icon">{{ stat.icon }}</span>
+        <span class="stat-value">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="section testimonials">
+  <h2 class="section-title">What People Say</h2>
+  <p class="section-desc">Hear from our satisfied clients.</p>
+  <div class="testimonials-grid">
+    @for (t of testimonials; track t.name) {
+      <div class="testimonial-card">
+        <span class="quote">"</span>
+        <p>{{ t.text }}</p>
+        <div class="author">
+          <div class="avatar"></div>
+          <div>
+            <strong>{{ t.name }}</strong>
+            <span>{{ t.role }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="testimonial-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<div class="admin-login-page">
+  <div class="login-card">
+    <h1>Admin login</h1>
+    <p class="hint">Salon management</p>
+    <form (ngSubmit)="submit()">
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="admin@salon.com" required />
+      </div>
+      <div class="form-row">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
+      </div>
+      @if (error) {
+        <p class="form-error">{{ error }}</p>
+      }
+      <button type="submit" class="btn btn-accent" [disabled]="loading">
+        {{ loading ? 'Signing in…' : 'Sign in' }}
+      </button>
+    </form>
+    <a routerLink="/home" class="back-link">← Back to site</a>
+  </div>
+</div>

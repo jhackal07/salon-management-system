@@ -1,0 +1,20 @@
+<div class="page contact-page">
+  <section class="section">
+    <h1 class="page-title">Contact Us</h1>
+    <p class="section-desc">Get in touch for bookings or questions.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><span class="icon">📍</span> Cyberville Subdivision, Gen. Trias, Cavite</p>
+        <p><span class="icon">📞</span> +63 912 107 0827</p>
+        <p><span class="icon">✉️</span> luciano&#64;beautysalon.com</p>
+      </div>
+      <form class="contact-form" (ngSubmit)="submit()">
+        <input type="text" [(ngModel)]="model.name" name="name" placeholder="Your Name" required />
+        <input type="email" [(ngModel)]="model.email" name="email" placeholder="Your Email" required />
+        <textarea [(ngModel)]="model.message" name="message" placeholder="Your Message" rows="5"></textarea>
+        <button type="submit" class="btn btn-accent">Send Message</button>
+      </form>
+    </div>
+  </section>
+</div>

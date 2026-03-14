@@ -1,0 +1,48 @@
+<div class="page my-bookings-page">
+  <section class="section">
+    <h1 class="page-title">My Bookings</h1>
+    <p class="section-desc">View your upcoming and past appointments.</p>
+
+    @if (loading) {
+      <p>Loading…</p>
+    } @else if (error) {
+      <p class="error">{{ error }}</p>
+      <a routerLink="/login" class="btn btn-accent">Sign in</a>
+    } @else {
+      @if (upcoming.length > 0) {
+        <h2 class="subsection-title">Upcoming</h2>
+        <ul class="booking-list">
+          @for (b of upcoming; track b.id) {
+            <li class="booking-card">
+              <span class="booking-number">{{ b.bookingNumber }}</span>
+              <span class="booking-date">{{ b.date }}</span>
+              <span class="booking-time">{{ b.time }}</span>
+              <span class="booking-service">{{ b.serviceName }}</span>
+              <span class="booking-artist">with {{ b.artistName }}</span>
+              <span class="badge badge-{{ b.status }}">{{ b.status }}</span>
+            </li>
+          }
+        </ul>
+      }
+      @if (past.length > 0) {
+        <h2 class="subsection-title">Past</h2>
+        <ul class="booking-list past">
+          @for (b of past; track b.id) {
+            <li class="booking-card">
+              <span class="booking-number">{{ b.bookingNumber }}</span>
+              <span class="booking-date">{{ b.date }}</span>
+              <span class="booking-time">{{ b.time }}</span>
+              <span class="booking-service">{{ b.serviceName }}</span>
+              <span class="booking-artist">with {{ b.artistName }}</span>
+              <span class="badge badge-{{ b.status }}">{{ b.status }}</span>
+            </li>
+          }
+        </ul>
+      }
+      @if (upcoming.length === 0 && past.length === 0) {
+        <p class="empty">You don’t have any bookings yet.</p>
+        <a routerLink="/book" class="btn btn-accent">Book an appointment</a>
+      }
+    }
+  </section>
+</div>

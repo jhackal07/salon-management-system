@@ -1,0 +1,35 @@
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h3>Contact Information</h3>
+      <p><span class="icon">📍</span> Cyberville Subdivision, Gen. Trias, Cavite</p>
+      <p><span class="icon">📞</span> +63 912 107 0827</p>
+      <p><span class="icon">✉️</span> luciano&#64;beautysalon.com</p>
+      <div class="social">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="Pinterest">P</a>
+        <a href="#" aria-label="Instagram">IG</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3>Subscribe Newsletter</h3>
+      <p>Get updates on offers and new services.</p>
+      <form class="newsletter" (submit)="$event.preventDefault()">
+        <input type="email" placeholder="Your Email" />
+        <button type="submit">→</button>
+      </form>
+    </div>
+    <div class="footer-col">
+      <h3>Recent Works</h3>
+      <div class="recent-works">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="work-thumb"></div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    © {{ currentYear }} Beauty Salon All Rights Reserved
+  </div>
+</footer>

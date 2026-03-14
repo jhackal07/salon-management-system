@@ -1,0 +1,73 @@
+<div class="admin-page">
+  <h1>Service management</h1>
+  <p class="page-desc">Add, edit, or remove services and treatments.</p>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <div class="add-form">
+    <h2>Add service</h2>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="new-service-name">Service name</label>
+        <input id="new-service-name" type="text" [(ngModel)]="newService.name" name="name" placeholder="e.g. Facial" />
+      </div>
+      <div class="form-field">
+        <label for="new-service-duration">Duration (min)</label>
+        <input id="new-service-duration" type="number" [(ngModel)]="newService.duration" name="duration" min="1" />
+      </div>
+      <div class="form-field">
+        <label for="new-service-price">Price</label>
+        <input id="new-service-price" type="number" [(ngModel)]="newService.price" name="price" min="0" step="0.01" placeholder="0.00" />
+      </div>
+      <div class="form-field form-field-btn">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-accent" (click)="add()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  @if (loading) {
+    <p>Loading…</p>
+  } @else {
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Duration (min)</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (s of services; track s.id) {
+            <tr>
+              @if (editing && editing.id === s.id) {
+                <td><input type="text" [(ngModel)]="editing!.name" class="inline-input" /></td>
+                <td><input type="number" [(ngModel)]="editing!.duration" class="inline-input" min="1" /></td>
+                <td><input type="number" [(ngModel)]="editing!.price" class="inline-input" min="0" step="0.01" /></td>
+                <td>
+                  <button type="button" class="btn-sm btn-accent" (click)="saveEdit()">Save</button>
+                  <button type="button" class="btn-sm btn-outline" (click)="cancelEdit()">Cancel</button>
+                </td>
+              } @else {
+                <td>{{ s.name }}</td>
+                <td>{{ s.duration }}</td>
+                <td>₱{{ s.price }}</td>
+                <td>
+                  <button type="button" class="btn-sm btn-outline" (click)="startEdit(s)">Edit</button>
+                  <button type="button" class="btn-sm btn-danger" (click)="delete(s.id)">Delete</button>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    @if (services.length === 0) {
+      <p class="empty">No services. Add one above.</p>
+    }
+  }
+</div>

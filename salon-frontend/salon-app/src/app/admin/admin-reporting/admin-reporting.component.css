@@ -1,0 +1,209 @@
+.admin-page h1 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.page-desc {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.report-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.report-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.report-controls input[type="date"] {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.report-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  min-width: 140px;
+}
+
+.stat-card.earnings {
+  background: #f5f5f5;
+  border-color: #d4af37;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.loading-msg {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.error-hint {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.report-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.report-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  color: #1a1a1a;
+  margin-bottom: 0.35rem;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.earnings-block {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: inline-block;
+}
+
+.earnings-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.earnings-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.user-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.user-stat-card {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  min-width: 180px;
+}
+
+.user-stat-card.guest {
+  background: #f5f5f5;
+  border-color: #bdbdbd;
+}
+
+.user-stat-card.account {
+  background: #e8eaf6;
+  border-color: #7986cb;
+}
+
+.user-stat-card.total {
+  background: #e8f5e9;
+  border-color: #81c784;
+}
+
+.user-stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.35rem;
+}
+
+.user-stat-value {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.badge-confirmed { background: #e8f5e9; color: #2e7d32; }
+.badge-in_progress { background: #e3f2fd; color: #1565c0; }
+.badge-paid { background: #f3e5f5; color: #6a1b9a; }
+.badge-cancelled { background: #ffebee; color: #c62828; }
+
+.empty,
+.error {
+  margin-top: 1rem;
+  color: #666;
+}
+
+.error {
+  color: #c00;
+}

@@ -1,0 +1,21 @@
+<header class="site-header">
+  <a routerLink="/home" class="logo">BEAUTY SALON</a>
+  <nav class="nav">
+    <a routerLink="/home" routerLinkActive="active">HOME</a>
+    <a routerLink="/about" routerLinkActive="active">ABOUT</a>
+    <a routerLink="/services" routerLinkActive="active">SERVICES</a>
+    <a routerLink="/pricing" routerLinkActive="active">PRICING</a>
+    <a routerLink="/team" routerLinkActive="active">TEAM</a>
+    <a routerLink="/contact" routerLinkActive="active">CONTACT</a>
+    <a routerLink="/book" routerLinkActive="active" class="cta">BOOK</a>
+    @if (!auth.isLoggedIn) {
+      <a routerLink="/login" routerLinkActive="active">LOGIN</a>
+    } @else {
+      <a routerLink="/my-bookings" routerLinkActive="active">MY BOOKINGS</a>
+      @if (auth.isAdmin) {
+        <a routerLink="/admin/bookings" routerLinkActive="active" class="admin-link">ADMIN</a>
+      }
+      <button type="button" class="nav-btn" (click)="logout()">LOG OUT</button>
+    }
+  </nav>
+</header>
