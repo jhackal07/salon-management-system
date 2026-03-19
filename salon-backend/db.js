@@ -13,9 +13,16 @@ function buildConnectionString() {
 
 const connectionString = buildConnectionString();
 
-const pool = connectionString
-  ? new Pool({ connectionString })
+// Render and most cloud Postgres require SSL; enable it when using DATABASE_URL
+const poolConfig = connectionString
+  ? {
+      connectionString,
+      ...(process.env.DATABASE_URL && {
+        ssl: { rejectUnauthorized: false },
+      }),
+    }
   : null;
+const pool = poolConfig ? new Pool(poolConfig) : null;
 
 async function query(text, params) {
   if (!pool) throw new Error('Database not configured. Set DATABASE_URL or PG_* env vars.');
