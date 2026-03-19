@@ -8,6 +8,7 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const authRoutes = require('./routes/authRoutes');
+const healthRoutes = require('./routes/healthRoutes');
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.use('/api/services', serviceRoutes);
 app.use('/api/report', reportRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/health', healthRoutes);
 
 const db = require('./db');
 app.listen(5000, () => {
