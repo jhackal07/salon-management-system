@@ -11,7 +11,9 @@
     @if (!auth.isLoggedIn) {
       <a routerLink="/login" routerLinkActive="active">LOGIN</a>
     } @else {
-      <a routerLink="/my-bookings" routerLinkActive="active">MY BOOKINGS</a>
+      @if (!auth.isAdmin) {
+        <a routerLink="/my-bookings" routerLinkActive="active">MY BOOKINGS</a>
+      }
       @if (auth.isAdmin) {
         <a routerLink="/admin/bookings" routerLinkActive="active" class="admin-link">ADMIN</a>
       }

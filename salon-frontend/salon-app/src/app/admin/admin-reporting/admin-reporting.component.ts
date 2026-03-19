@@ -1,4 +1,4 @@
-import { DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -29,7 +29,7 @@ interface Report {
 @Component({
   selector: 'app-admin-reporting',
   standalone: true,
-  imports: [FormsModule, DecimalPipe],
+  imports: [FormsModule, DatePipe, DecimalPipe],
   templateUrl: './admin-reporting.component.html',
   styleUrl: './admin-reporting.component.css',
 })
