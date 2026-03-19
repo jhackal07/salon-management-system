@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -18,7 +19,7 @@ export interface Booking {
 @Component({
   selector: 'app-my-bookings',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './my-bookings.component.html',
   styleUrl: './my-bookings.component.css',
 })
