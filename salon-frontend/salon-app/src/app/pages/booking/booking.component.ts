@@ -50,10 +50,19 @@ export class BookingComponent {
     this.buildTimeSlots();
   }
 
+  /** Returns YYYY-MM-DD using the user's local timezone (not UTC). */
+  private getLocalYyyyMmDd(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   private buildTimeSlots() {
-    for (let h = 9; h <= 17; h++) {
+    const openHour = 9;
+    const closeHour = 20; // open until 8pm; last start slot is 19:30
+    for (let h = openHour; h < closeHour; h++) {
       for (const m of ['00', '30']) {
-        if (h === 17 && m === '30') break;
         this.timeSlots.push(`${String(h).padStart(2, '0')}:${m}`);
       }
     }
@@ -61,7 +70,7 @@ export class BookingComponent {
 
   /** Today in YYYY-MM-DD (local) for min date attribute */
   get minDate(): string {
-    return new Date().toISOString().slice(0, 10);
+    return this.getLocalYyyyMmDd(new Date());
   }
 
   /** Time slots available for the selected date (excludes past times when date is today) */

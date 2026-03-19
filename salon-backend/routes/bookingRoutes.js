@@ -65,7 +65,7 @@ router.post('/', async (req, res) => {
             [...insertParams.slice(0, 5), bookingNumber, ...insertParams.slice(5)]
           );
           const row = (await db.query(
-            'SELECT id, booking_number, booking_date AS date, time_slot AS time, guest_name AS "guestName", guest_email AS "guestEmail", status FROM appointments WHERE booking_number = $1',
+            "SELECT id, booking_number, TO_CHAR(booking_date, 'YYYY-MM-DD') AS date, time_slot AS time, guest_name AS \"guestName\", guest_email AS \"guestEmail\", status FROM appointments WHERE booking_number = $1",
             [bookingNumber]
           )).rows[0];
           return res.status(201).json({
@@ -129,7 +129,7 @@ router.get('/', async (req, res) => {
   try {
     if (db.isDbConfigured()) {
       const result = await db.query(
-        `SELECT a.id, a.booking_number AS "bookingNumber", a.booking_date AS date, a.time_slot AS time,
+        `SELECT a.id, a.booking_number AS "bookingNumber", TO_CHAR(a.booking_date, 'YYYY-MM-DD') AS date, a.time_slot AS time,
                 a.guest_name AS "guestName", a.guest_email AS "guestEmail", a.status,
                 s.name AS "serviceName", ar.name AS "artistName"
          FROM appointments a
@@ -168,7 +168,7 @@ router.patch('/:id', async (req, res) => {
   try {
     if (db.isDbConfigured()) {
       const result = await db.query(
-        'UPDATE appointments SET status = $1 WHERE id = $2 RETURNING id, booking_number, booking_date AS date, time_slot AS time, status',
+        "UPDATE appointments SET status = $1 WHERE id = $2 RETURNING id, booking_number, TO_CHAR(booking_date, 'YYYY-MM-DD') AS date, time_slot AS time, status",
         [status, id]
       );
       if (result.rows.length === 0) {
@@ -195,7 +195,7 @@ router.get('/mine', async (req, res) => {
   try {
     if (db.isDbConfigured()) {
       const result = await db.query(
-        `SELECT a.id, a.booking_number AS "bookingNumber", a.booking_date AS date, a.time_slot AS time,
+        `SELECT a.id, a.booking_number AS "bookingNumber", TO_CHAR(a.booking_date, 'YYYY-MM-DD') AS date, a.time_slot AS time,
                 a.guest_name AS "guestName", a.guest_email AS "guestEmail", a.status,
                 s.name AS "serviceName", ar.name AS "artistName"
          FROM appointments a

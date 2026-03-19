@@ -116,12 +116,26 @@
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn-accent {
   background: var(--accent, #d4af37);
   color: #1a1a1a;
-  margin-top: 0.5rem;
+  /* Keep sizing consistent with `.btn-outline` which has a 2px border. */
+  border: 2px solid #e0e0e0;
+  margin-top: 0;
+}
+
+.btn-accent:hover:not(:disabled) {
+  background: #c4a030;
+  color: #1a1a1a;
+  border-color: var(--accent, #d4af37);
+}
+
+.btn-accent:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .btn-accent:disabled {
@@ -194,5 +208,15 @@
   display: flex;
   gap: 0.75rem;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+}
+
+.confirmation-card .actions .btn {
+  flex: 1 1 0;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
 }

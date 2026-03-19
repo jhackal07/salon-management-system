@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   try {
     if (db.isDbConfigured()) {
       const bookingsResult = await db.query(
-        `SELECT a.id, a.booking_number AS "bookingNumber", a.booking_date AS date, a.time_slot AS time,
+        `SELECT a.id, a.booking_number AS "bookingNumber", TO_CHAR(a.booking_date, 'YYYY-MM-DD') AS date, a.time_slot AS time,
                 a.guest_name AS "guestName", a.guest_email AS "guestEmail", a.status, a.user_id AS "userId",
                 s.name AS "serviceName", s.price, ar.name AS "artistName"
          FROM appointments a

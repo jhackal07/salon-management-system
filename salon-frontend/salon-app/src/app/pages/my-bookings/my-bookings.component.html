@@ -11,33 +11,65 @@
     } @else {
       @if (upcoming.length > 0) {
         <h2 class="subsection-title">Upcoming</h2>
-        <ul class="booking-list">
-          @for (b of upcoming; track b.id) {
-            <li class="booking-card">
-              <span class="booking-number">{{ b.bookingNumber }}</span>
-              <span class="booking-date">{{ b.date | date:'yyyy-MM-dd' }}</span>
-              <span class="booking-time">{{ b.time }}</span>
-              <span class="booking-service">{{ b.serviceName }}</span>
-              <span class="booking-artist">with {{ b.artistName }}</span>
-              <span class="badge badge-{{ b.status }}">{{ b.status }}</span>
-            </li>
-          }
-        </ul>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Booking #</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Service</th>
+                <th>Artist</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (b of upcoming; track b.id) {
+                <tr>
+                  <td><strong>{{ b.bookingNumber }}</strong></td>
+                  <td>{{ b.date }}</td>
+                  <td>{{ b.time }}</td>
+                  <td>{{ b.serviceName }}</td>
+                  <td>{{ b.artistName }}</td>
+                  <td>
+                    <span class="badge badge-{{ b.status }}">{{ b.status }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       }
       @if (past.length > 0) {
         <h2 class="subsection-title">Past</h2>
-        <ul class="booking-list past">
-          @for (b of past; track b.id) {
-            <li class="booking-card">
-              <span class="booking-number">{{ b.bookingNumber }}</span>
-              <span class="booking-date">{{ b.date }}</span>
-              <span class="booking-time">{{ b.time }}</span>
-              <span class="booking-service">{{ b.serviceName }}</span>
-              <span class="booking-artist">with {{ b.artistName }}</span>
-              <span class="badge badge-{{ b.status }}">{{ b.status }}</span>
-            </li>
-          }
-        </ul>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Booking #</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Service</th>
+                <th>Artist</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (b of past; track b.id) {
+                <tr>
+                  <td><strong>{{ b.bookingNumber }}</strong></td>
+                  <td>{{ b.date }}</td>
+                  <td>{{ b.time }}</td>
+                  <td>{{ b.serviceName }}</td>
+                  <td>{{ b.artistName }}</td>
+                  <td>
+                    <span class="badge badge-{{ b.status }}">{{ b.status }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       }
       @if (upcoming.length === 0 && past.length === 0) {
         <p class="empty">You don’t have any bookings yet.</p>

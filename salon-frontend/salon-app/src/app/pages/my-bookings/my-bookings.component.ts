@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+// Dates are already returned as YYYY-MM-DD from the API.
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -19,7 +19,7 @@ export interface Booking {
 @Component({
   selector: 'app-my-bookings',
   standalone: true,
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink],
   templateUrl: './my-bookings.component.html',
   styleUrl: './my-bookings.component.css',
 })
@@ -36,6 +36,14 @@ export class MyBookingsComponent {
     private cdr: ChangeDetectorRef,
   ) {}
 
+  /** YYYY-MM-DD in local timezone (not UTC) */
+  private getLocalYyyyMmDd(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   ngOnInit() {
     if (!this.auth.isLoggedIn) {
       this.error = 'Please sign in to view your bookings.';
@@ -46,7 +54,7 @@ export class MyBookingsComponent {
     this.api.getWithAuth<Booking[]>('/bookings/mine').subscribe({
       next: (data) => {
         this.bookings = data || [];
-        const today = new Date().toISOString().slice(0, 10);
+        const today = this.getLocalYyyyMmDd(new Date());
         this.upcoming = this.bookings.filter((b) => b.date >= today);
         this.past = this.bookings.filter((b) => b.date < today);
         this.loading = false;

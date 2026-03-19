@@ -1,4 +1,4 @@
-import { DatePipe, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -29,7 +29,7 @@ interface Report {
 @Component({
   selector: 'app-admin-reporting',
   standalone: true,
-  imports: [FormsModule, DatePipe, DecimalPipe],
+  imports: [FormsModule, DecimalPipe],
   templateUrl: './admin-reporting.component.html',
   styleUrl: './admin-reporting.component.css',
 })
@@ -45,8 +45,16 @@ export class AdminReportingComponent {
     private cdr: ChangeDetectorRef,
   ) {}
 
+  /** YYYY-MM-DD in local timezone (not UTC) */
+  private getLocalYyyyMmDd(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   ngOnInit() {
-    const today = new Date().toISOString().slice(0, 10);
+    const today = this.getLocalYyyyMmDd(new Date());
     this.from = today;
     this.to = today;
     this.loadReport();

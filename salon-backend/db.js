@@ -13,13 +13,15 @@ function buildConnectionString() {
 
 const connectionString = buildConnectionString();
 
-// Render and most cloud Postgres require SSL; enable it when using DATABASE_URL
+// Render/managed Postgres commonly require SSL.
+// Only enable that automatically in production to avoid breaking local dev.
+const isProduction = process.env.NODE_ENV === 'production';
 const poolConfig = connectionString
   ? {
       connectionString,
-      ...(process.env.DATABASE_URL && {
-        ssl: { rejectUnauthorized: false },
-      }),
+      ...(process.env.DATABASE_URL && isProduction
+        ? { ssl: { rejectUnauthorized: false } }
+        : {}),
     }
   : null;
 const pool = poolConfig ? new Pool(poolConfig) : null;

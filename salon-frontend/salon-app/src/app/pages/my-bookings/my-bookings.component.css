@@ -2,45 +2,98 @@
   padding: 3rem 2rem;
 }
 
-.subsection-title {
-  font-size: 1.25rem;
-  margin: 1.5rem 0 0.75rem;
-  color: #333;
-}
-
-.booking-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2rem;
-}
-
-.booking-list.past {
-  opacity: 0.85;
-}
-
-.booking-card {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr auto auto auto;
-  gap: 0.75rem 1rem;
-  align-items: center;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  background: #fafafa;
-  border: 1px solid #eee;
+.table-wrap {
+  overflow-x: auto;
+  background: #fff;
   border-radius: 8px;
-  font-size: 0.95rem;
+  border: 1px solid #e0e0e0;
 }
 
-.booking-number {
-  font-weight: 600;
-  color: var(--accent, #d4af37);
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Force identical column widths for Upcoming and Past tables */
+  table-layout: fixed;
 }
 
-.badge {
-  font-size: 0.75rem;
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Fixed column widths to prevent auto-layout differences */
+.data-table th:nth-child(1),
+.data-table td:nth-child(1) {
+  width: 220px; /* Booking # */
+}
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) {
+  width: 140px; /* Date */
+}
+.data-table th:nth-child(3),
+.data-table td:nth-child(3) {
+  width: 90px; /* Time */
+}
+.data-table th:nth-child(4),
+.data-table td:nth-child(4) {
+  width: 160px; /* Service */
+}
+.data-table th:nth-child(5),
+.data-table td:nth-child(5) {
+  width: 240px; /* Artist */
+}
+.data-table th:nth-child(6),
+.data-table td:nth-child(6) {
+  width: 120px; /* Status */
+}
+
+/* Keep long content from resizing columns */
+.data-table td,
+.data-table th {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.data-table th:last-child,
+.data-table td:last-child {
+  text-align: left;
+}
+
+/* Table-specific badge sizing to avoid any conflicts with legacy styles */
+.data-table .badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   text-transform: capitalize;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.data-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.data-table td {
+  font-size: 0.9rem;
+}
+
+.badge-paid {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.badge-in_progress {
+  background: #e3f2fd;
+  color: #1565c0;
 }
 
 .badge-confirmed {
@@ -53,9 +106,10 @@
   color: #c62828;
 }
 
-.badge-completed {
-  background: #e8f5e9;
-  color: #2e7d32;
+.subsection-title {
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.75rem;
+  color: #333;
 }
 
 .error {
@@ -66,14 +120,4 @@
 .empty {
   color: #666;
   margin-bottom: 1rem;
-}
-
-@media (max-width: 640px) {
-  .booking-card {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .booking-artist {
-    grid-column: span 2;
-  }
 }
