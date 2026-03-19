@@ -15,7 +15,7 @@
           @for (b of upcoming; track b.id) {
             <li class="booking-card">
               <span class="booking-number">{{ b.bookingNumber }}</span>
-              <span class="booking-date">{{ b.date }}</span>
+              <span class="booking-date">{{ b.date | date:'yyyy-MM-dd' }}</span>
               <span class="booking-time">{{ b.time }}</span>
               <span class="booking-service">{{ b.serviceName }}</span>
               <span class="booking-artist">with {{ b.artistName }}</span>
